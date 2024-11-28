@@ -1,1 +1,19 @@
-﻿
+﻿Databazova aplikace bude obsahovat zakladni prvky OOP
+1. Dědičnost
+2. Polzmorphysmus
+3. Zapouždření
+
+Aplikace bude s použiti WindowsForms. Hlavni okno bude mit textove pole kde budou evidence prvku.
+Prvku budou předpsaný třidou ktera bude mit několik potomků, Nadtřida bude předepsana interfacem.
+
+Trida: MotorovaVozidla;
+Podtřida: Auta, Motocykl
+
+Samostatne MotorovaVozidla budo mit parametry:
+1. Palivo: Disel nebo benzin (Enum)
+2. Model
+3. JeSpravne (bool)
+
+Trida auta ma 
+1. Pořet dveře 3 nebo 5 (Enum)
+
