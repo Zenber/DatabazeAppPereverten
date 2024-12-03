@@ -12,7 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DatabazeAppPereverten
 {
-    
+
     public partial class Form1 : Form
     {
         public static int counterID = 1;
@@ -24,44 +24,41 @@ namespace DatabazeAppPereverten
             InitializeComponent();
             instance = this;
             listView = AutaList;
+            this.Text = "Evidence Aut";
         }
 
         private void AutaList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
+        //Generuje nahodna auta a pridava je do ListView
         private void NactiButton_Click(object sender, EventArgs e)
         {
-            //TODO reed data fro txt file and add to list view
-            //A, Nebo Nahodne generovani prvku
             List<Auto> generovaneAuta = Auto.GenereteAuta();
 
-            foreach (Auto auto in generovaneAuta) {
+            foreach (Auto auto in generovaneAuta)
+            {
                 ListViewItem viewItem = AutaToListViewItem(auto);
                 counterID++;
                 AutaList.Items.Add(viewItem);
             }
-
-            
-
         }
-
+        //
         private void SmazSeznamButton_Click(object sender, EventArgs e)
         {
             AutaList.Items.Clear();
             counterID = 1;
         }
-
+        //Svaze vsechna vybrana auta
         private async void SmazButton_Click(object sender, EventArgs e)
         {
-            
-                    foreach (ListViewItem eachItem in AutaList.SelectedItems)
-                    {
-                        AutaList.Items.Remove(eachItem);
-                    }
-        }
 
+            foreach (ListViewItem eachItem in AutaList.SelectedItems)
+            {
+                AutaList.Items.Remove(eachItem);
+            }
+        }
+        //Veme si vybrane auto, otevre Modalni okno kde muzeme upravit auto
         private void UpravButton_Click(object sender, EventArgs e)
         {
             ListViewItem item = null;
@@ -69,20 +66,18 @@ namespace DatabazeAppPereverten
             {
                 item = AutaList.SelectedItems[0];
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
             }
-            
+
             Auto auto = ListWiewItemToAuta(item);
 
             EditForm editForm = new EditForm(auto);
             editForm.ShowDialog();
-
-            
         }
-
+        //
         private void NastartujButton_Click(object sender, EventArgs e)
         {
             ListViewItem item = null;
@@ -148,7 +143,8 @@ namespace DatabazeAppPereverten
         }
 
         //Transfer ListViewItem to Auto
-        internal Auto ListWiewItemToAuta(ListViewItem item) {
+        internal Auto ListWiewItemToAuta(ListViewItem item)
+        {
             Znacka znacka = data.Znacka.Audi;
             Palivo palivo = data.Palivo.Disel;
             bool jeSpravne = true;
@@ -202,12 +198,13 @@ namespace DatabazeAppPereverten
                     break;
             }
 
-            return new Auto(palivo,znacka, jeSpravne, jeNastartovane);
+            return new Auto(palivo, znacka, jeSpravne, jeNastartovane);
 
         }
 
         //Transfer Auto to ListViewItem
-        internal ListViewItem AutaToListViewItem(Auto auto) {
+        internal ListViewItem AutaToListViewItem(Auto auto)
+        {
 
             ListViewItem viewItem = new ListViewItem();
 
@@ -217,7 +214,8 @@ namespace DatabazeAppPereverten
             string jeNastartovane = "";
 
 
-            switch (auto.znacka) {
+            switch (auto.znacka)
+            {
                 case data.Znacka.Audi:
                     znacka = "Audi";
                     break;
@@ -235,7 +233,8 @@ namespace DatabazeAppPereverten
                     break;
             }
 
-            switch (auto.palivo) {
+            switch (auto.palivo)
+            {
                 case data.Palivo.Disel:
                     palivo = "Disel";
                     break;
@@ -244,7 +243,8 @@ namespace DatabazeAppPereverten
                     break;
             }
 
-            switch (auto.jeSpravny) {
+            switch (auto.jeSpravny)
+            {
                 case true:
                     jeSpravne = "Ano";
                     break;
@@ -271,11 +271,11 @@ namespace DatabazeAppPereverten
             viewItem.SubItems.Add(jeSpravne);
             viewItem.SubItems.Add(jeNastartovane);
 
-            
+
 
             return viewItem;
         }
 
-        
+
     }
 }
